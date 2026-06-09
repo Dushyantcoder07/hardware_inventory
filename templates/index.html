@@ -21,6 +21,7 @@
         <th>Category</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Action</th>
     </tr>
 
     {% for product in products %}
@@ -31,6 +32,10 @@
         <td>{{ product.Category }}</td>
         <td>{{ product.Price }}</td>
         <td>{{ product.Quantity }}</td>
+        <td><a href="/edit/{{product.ProductID}}">
+            <button>EDIT</button>
+            </a>
+        </td>
     </tr>
     {% endfor %}
 
