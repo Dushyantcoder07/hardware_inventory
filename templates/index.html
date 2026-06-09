@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hardware Inventory</title>
+</head>
+<body>
+
+<h1>Hardware Inventory System</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+
+    {% for product in products %}
+    <tr>
+        <td>{{ product.ProductID }}</td>
+        <td>{{ product.ProductName }}</td>
+        <td>{{ product.Brand }}</td>
+        <td>{{ product.Category }}</td>
+        <td>{{ product.Price }}</td>
+        <td>{{ product.Quantity }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

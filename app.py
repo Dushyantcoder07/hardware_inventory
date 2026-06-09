@@ -1,9 +1,19 @@
-from flask import Flask
-app =  Flask(__name__)
+from flask import Flask, render_template
+from database import get_connection
+
+app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hardware Inventory"
+    conn = get_connection()
+    cursor = conn.cursor()
 
-if __name__== "__main__":
+    cursor.execute("SELECT * FROM Products")
+    products = cursor.fetchall()
+
+    conn.close()
+
+    return render_template("index.html", products=products)
+
+if __name__ == "__main__":
     app.run(debug=True)
