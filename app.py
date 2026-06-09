@@ -40,5 +40,50 @@ def add_product():
     
     return render_template("add_product.html")
 
+@app.route("/edit/<int:id>",methods=["GET","POST"])
+def edit_product(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM Products WHERE ProductID = ?",(id,)
+    )
+
+    product = cursor.fetchone()
+
+    if request.method == "POST":
+
+        product_name = request.form["product_name"]
+        brand = request.form["brand"]
+        category = request.form["category"]
+        price = request.form["price"]
+        quantity = request.form["quantity"]
+
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                UPDATE Products
+                SET ProductName=?,
+                Brand=?,
+                Category=?,
+                Price=?,
+                Quantity=?
+            WHERE ProductID=?
+        """, (
+        product_name,
+        brand,
+        category,
+        price,
+        quantity,
+        id
+    ))
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/")
+    return render_template("edit_product.html", product=product)
+
 if __name__ == "__main__":
     app.run(debug=True)
