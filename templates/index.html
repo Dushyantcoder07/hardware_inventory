@@ -35,6 +35,9 @@
         <td><a href="/edit/{{product.ProductID}}">
             <button>EDIT</button>
             </a>
+            <a href="/delete/{{product.ProductID}}" onclick="return confirm('Are you sure you want to delete this product?')">
+                <button>DELETE</button>
+            </a>
         </td>
     </tr>
     {% endfor %}
