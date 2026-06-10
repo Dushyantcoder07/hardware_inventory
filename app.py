@@ -85,5 +85,17 @@ def edit_product(id):
         return redirect("/")
     return render_template("edit_product.html", product=product)
 
+@app.route("/delete/<int:id>")
+def delete_product(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+                  "DELETE FROM Products WHERE ProductID=?",(id,))
+    
+    conn.commit()
+    conn.close()
+    return redirect("/")
+
 if __name__ == "__main__":
     app.run(debug=True)
