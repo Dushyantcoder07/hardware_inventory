@@ -5,15 +5,30 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
+    
+    search = request.args.get("search")
+
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM Products")
+    if search:
+        cursor.execute(
+            "SELECT * FROM Products WHERE ProductName LIKE ?",
+            ('%' + search + '%',)
+        )
+    else:
+        cursor.execute(
+            "SELECT * FROM Products"
+        )
+
     products = cursor.fetchall()
 
     conn.close()
 
-    return render_template("index.html", products=products)
+    return render_template(
+        "index.html",
+        products=products
+    )
 
 @app.route("/add",methods=["GET","POST"])
 def add_product():
