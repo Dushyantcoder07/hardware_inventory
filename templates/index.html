@@ -13,6 +13,23 @@
 
 <br><br>
 
+<form method="GET" action="/">
+    <input type="text"
+           name="search"
+           placeholder="Search Product"
+           value="{{ request.args.get('search', '') }}">
+
+    <button type="submit">Search</button>
+
+    <a href="/">
+        <button type="button">Reset</button>
+    </a>
+</form>
+
+<br>
+
+<br><br>
+
 <table border="1">
     <tr>
         <th>ID</th>
