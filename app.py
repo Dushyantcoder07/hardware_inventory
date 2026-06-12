@@ -27,7 +27,8 @@ def home():
 
     return render_template(
         "index.html",
-        products=products
+        products=products,
+        total_products=len(products)
     )
 
 @app.route("/add",methods=["GET","POST"])
