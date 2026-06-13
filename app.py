@@ -31,6 +31,33 @@ def home():
         total_products=len(products)
     )
 
+@app.route("/dashboard")
+def dashboard():
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    # Total Products
+    cursor.execute("SELECT COUNT(*) FROM Products")
+    total_products = cursor.fetchone()[0]
+
+    # Total Stock
+    cursor.execute("SELECT SUM(Quantity) FROM Products")
+    total_stock = cursor.fetchone()[0]
+
+    # Total Brands
+    cursor.execute("SELECT COUNT(*) FROM Brands")
+    total_brands = cursor.fetchone()[0]
+
+    conn.close()
+
+    return render_template(
+        "dashboard.html",
+        total_products=total_products,
+        total_stock=total_stock,
+        total_brands=total_brands
+    )
+
 @app.route("/add",methods=["GET","POST"])
 def add_product():
 
