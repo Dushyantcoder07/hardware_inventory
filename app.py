@@ -140,5 +140,41 @@ def delete_product(id):
     conn.close()
     return redirect("/")
 
+@app.route("/analytics")
+def analytics():
+
+    #importing pandas
+    import pandas as pd 
+    conn = get_connection()
+    query = """SELECT Category,
+                COUNT(*) AS ProductCount
+                FROM Products
+                GROUP BY Category"""
+    
+    df = pd.read_sql(query,conn)
+
+    conn.close()
+    
+    #importing matplot for graph
+    import matplotlib.pyplot as plt
+    plt.figure(figsize=(8,5))
+
+    plt.bar(
+    df["Category"],
+    df["ProductCount"]
+    )
+
+    plt.title("Products by Category")
+    plt.xlabel("Category")
+    plt.ylabel("Number of Products")
+
+    plt.savefig("static/category_graph.png")
+
+    plt.tight_layout()
+
+    plt.close()
+    return render_template("analytics.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
