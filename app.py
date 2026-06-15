@@ -175,6 +175,32 @@ def analytics():
     plt.close()
     return render_template("analytics.html")
 
+@app.route("/reports")
+def reports():
+    
+    conn= get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    SELECT
+        p.ProductName,
+        b.BrandName,
+        c.CategoryName,
+        p.Price,
+        p.Quantity
+        FROM Products p
+    INNER JOIN Brands b
+        ON p.Brand = b.BrandName
+    INNER JOIN Categories c
+        ON p.Category = c.CategoryName
+""")
+    
+    report_data= cursor.fetchall()
+
+    conn.close()
+
+    return render_template("reports.html", report_data=report_data)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
