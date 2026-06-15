@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Analytics</title>
 </head>
+
 <body>
 
-<h1>Inventory Analytics</h1>
+    <h1>Inventory Analytics</h1>
 
-<img src="{{ url_for('static',
-filename='category_graph.png') }}"
-alt="Category Graph">
+    <h2>Products by Category</h2>
 
-<br><br>
+    <img src="{{ url_for('static', filename='category_graph.png') }}">
 
-<a href="/">Back To Home</a>
+    <br><br>
+
+    <h2>Stock by Brand</h2>
+
+    <img src="{{ url_for('static', filename='brand_graph.png') }}">
+
+    <br><br>
+
+    <a href="/">Back To Home</a>
 
 </body>
+
 </html>

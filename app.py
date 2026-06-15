@@ -173,6 +173,37 @@ def analytics():
     plt.tight_layout()
 
     plt.close()
+
+    #GRAPH-2
+
+    conn = get_connection()
+
+    query2 = """
+        SELECT Brand,
+        SUM(Quantity) AS TotalStock
+        FROM Products
+        GROUP BY Brand  """
+
+    df2 = pd.read_sql(query2, conn)
+
+    conn.close()
+
+    plt.figure(figsize=(8,5))
+
+    plt.bar(
+    df2["Brand"],
+    df2["TotalStock"]
+    )
+
+    plt.title("Stock by Brand")
+    plt.xlabel("Brand")
+    plt.ylabel("Total Stock")
+
+    plt.tight_layout()
+
+    plt.savefig("static/brand_graph.png")
+
+    plt.close()
     return render_template("analytics.html")
 
 @app.route("/reports")
