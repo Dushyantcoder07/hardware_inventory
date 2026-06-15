@@ -202,5 +202,43 @@ def reports():
     return render_template("reports.html", report_data=report_data)
 
 
+@app.route("/import_csv", methods=["GET", "POST"])
+def import_csv():
+
+    if request.method == "POST":
+
+        file = request.files["csv_file"]
+
+        import pandas as pd
+
+        df = pd.read_csv(file)
+
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        for index, row in df.iterrows():
+
+            cursor.execute("""
+                INSERT INTO Products
+                (ProductName, Brand, Category, Price, Quantity)
+                VALUES (?, ?, ?, ?, ?)
+            """,
+            (
+                row["ProductName"],
+                row["Brand"],
+                row["Category"],
+                row["Price"],
+                row["Quantity"]
+            ))
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/")
+
+    return render_template("import_csv.html")
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
