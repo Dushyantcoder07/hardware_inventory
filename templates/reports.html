@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Report</title>
+</head>
+<body>
+
+    <h1>Inventory Report (JOIN Operation)</h1>
+
+    <table border="1">
+
+        <tr>
+            <th>Product Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+
+        {% for row in report_data %}
+        <tr>
+            <td>{{ row.ProductName }}</td>
+            <td>{{ row.BrandName }}</td>
+            <td>{{ row.CategoryName }}</td>
+            <td>{{ row.Price }}</td>
+            <td>{{ row.Quantity }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <br>
+
+    <a href="/">Back to Home</a>
+
+</body>
+</html>
