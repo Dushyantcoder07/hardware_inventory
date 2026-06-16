@@ -253,18 +253,56 @@ def import_csv():
 
         for index, row in df.iterrows():
 
-            cursor.execute("""
-                INSERT INTO Products
-                (ProductName, Brand, Category, Price, Quantity)
-                VALUES (?, ?, ?, ?, ?)
-            """,
-            (
-                row["ProductName"],
-                row["Brand"],
-                row["Category"],
-                row["Price"],
-                row["Quantity"]
-            ))
+            product_name = str(row["ProductName"]).strip()
+
+            cursor.execute(
+                """
+                SELECT ProductID
+                FROM Products
+                WHERE ProductName = ?
+                """,
+                (product_name,)
+            )
+
+            existing_product = cursor.fetchone()   
+
+            if existing_product:
+
+                cursor.execute(
+                    """
+                    UPDATE Products
+                    SET
+                    Brand=?,
+                    Category=?,
+                    Price=?,
+                    Quantity=?
+                    WHERE ProductName=?
+                    """,
+                    (
+                        row["Brand"],
+                        row["Category"],
+                        row["Price"],
+                        row["Quantity"],
+                        product_name
+                    )
+                )
+
+            else:
+
+                cursor.execute(
+                    """
+                    INSERT INTO Products
+                    (ProductName, Brand, Category, Price, Quantity)
+                    VALUES (?, ?, ?, ?, ?)
+                    """,
+                    (
+                        product_name,
+                        row["Brand"],
+                        row["Category"],
+                        row["Price"],
+                        row["Quantity"]
+                    )
+                )
 
         conn.commit()
         conn.close()
