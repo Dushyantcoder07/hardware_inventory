@@ -1,0 +1,33 @@
+body{
+    background-color: #f4f6f9;
+}
+
+.container-box{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+.page-title{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table{
+    background: white;
+}
+
+.btn{
+    margin-right: 5px;
+}
+
+.card{
+    border: none;
+    border-radius: 15px;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
