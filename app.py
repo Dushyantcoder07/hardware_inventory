@@ -157,7 +157,7 @@ def analytics():
     
     #importing matplot for graph
     import matplotlib.pyplot as plt
-    plt.figure(figsize=(8,5))
+    plt.figure(figsize=(10,6))
 
     plt.bar(
     df["Category"],
@@ -167,6 +167,8 @@ def analytics():
     plt.title("Products by Category")
     plt.xlabel("Category")
     plt.ylabel("Number of Products")
+
+    plt.grid(axis="y")
 
     plt.savefig("static/category_graph.png")
 
@@ -188,7 +190,7 @@ def analytics():
 
     conn.close()
 
-    plt.figure(figsize=(8,5))
+    plt.figure(figsize=(10,6))
 
     plt.bar(
     df2["Brand"],
@@ -200,6 +202,8 @@ def analytics():
     plt.ylabel("Total Stock")
 
     plt.tight_layout()
+
+    plt.grid(axis="y")
 
     plt.savefig("static/brand_graph.png")
 
