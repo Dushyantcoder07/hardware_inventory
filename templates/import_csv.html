@@ -1,68 +1,119 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Import CSV</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-<div class="container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
 
-    <div class="row justify-content-center">
+        <div class="container">
 
-        <div class="col-md-6">
+            <a class="navbar-brand" href="/">
+                📦 Hardware Inventory
+            </a>
 
-            <div class="card shadow">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
 
-                <div class="card-header text-center">
-                    <h2>CSV Synchronization</h2>
-                </div>
+                <span class="navbar-toggler-icon"></span>
 
-                <div class="card-body">
+            </button>
 
-                    <p class="text-muted text-center">
-                        Upload a CSV file to synchronize products with the inventory database.
-                    </p>
+            <div class="collapse navbar-collapse" id="navbarNav">
 
-                    <form method="POST" enctype="multipart/form-data">
+                <ul class="navbar-nav ms-auto">
 
-                        <div class="mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            Home
+                        </a>
+                    </li>
 
-                            <label class="form-label">
-                                Select CSV File
-                            </label>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">
+                            Dashboard
+                        </a>
+                    </li>
 
-                            <input
-                                type="file"
-                                class="form-control"
-                                name="csv_file"
-                                accept=".csv"
-                                required>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reports">
+                            Reports
+                        </a>
+                    </li>
 
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analytics">
+                            Analytics
+                        </a>
+                    </li>
 
-                        <div class="d-grid gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/import_csv">
+                            Sync CSV
+                        </a>
+                    </li>
 
-                            <button
-                                type="submit"
-                                class="btn btn-primary">
+                </ul>
 
-                                Sync CSV
+            </div>
 
-                            </button>
+        </div>
 
-                            <a
-                                href="/"
-                                class="btn btn-secondary">
+    </nav>
 
-                                Back to Home
+    <div class="container mt-5">
 
-                            </a>
+        <div class="row justify-content-center">
 
-                        </div>
+            <div class="col-md-6">
 
-                    </form>
+                <div class="card shadow">
+
+                    <div class="card-header text-center">
+                        <h2>CSV Synchronization</h2>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p class="text-muted text-center">
+                            Upload a CSV file to synchronize products with the inventory database.
+                        </p>
+
+                        <form method="POST" enctype="multipart/form-data">
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Select CSV File
+                                </label>
+
+                                <input type="file" class="form-control" name="csv_file" accept=".csv" required>
+
+                            </div>
+
+                            <div class="d-grid gap-2">
+
+                                <button type="submit" class="btn btn-primary">
+
+                                    Sync CSV
+
+                                </button>
+
+                                <a href="/" class="btn btn-secondary">
+
+                                    Back to Home
+
+                                </a>
+
+                            </div>
+
+                        </form>
+
+                    </div>
 
                 </div>
 
@@ -72,7 +123,8 @@
 
     </div>
 
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
