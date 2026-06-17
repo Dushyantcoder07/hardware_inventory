@@ -7,21 +7,72 @@
 </head>
 <body>
 
-    <h1>Import Products from CSV</h1>
+<div class="container mt-5">
 
-    <form method="POST" enctype="multipart/form-data">
+    <div class="row justify-content-center">
 
-        <input type="file" name="csv_file" required>
+        <div class="col-md-6">
 
-        <button type="submit">
-            Upload CSV
-        </button>
+            <div class="card shadow">
 
-    </form>
+                <div class="card-header text-center">
+                    <h2>CSV Synchronization</h2>
+                </div>
 
-    <br>
+                <div class="card-body">
 
-    <a href="/">Back to Home</a>
+                    <p class="text-muted text-center">
+                        Upload a CSV file to synchronize products with the inventory database.
+                    </p>
+
+                    <form method="POST" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Select CSV File
+                            </label>
+
+                            <input
+                                type="file"
+                                class="form-control"
+                                name="csv_file"
+                                accept=".csv"
+                                required>
+
+                        </div>
+
+                        <div class="d-grid gap-2">
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary">
+
+                                Sync CSV
+
+                            </button>
+
+                            <a
+                                href="/"
+                                class="btn btn-secondary">
+
+                                Back to Home
+
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
