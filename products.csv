@@ -1,7 +1,41 @@
 ProductName,Brand,Category,Price,Quantity
-RTX 4060,NVIDIA,GPU,29999,5
-RTX 4070,NVIDIA,GPU,44999,3
-Ryzen 5 5600X,AMD,CPU,15999,10
-Ryzen 7 7700X,AMD,CPU,28999,6
-Samsung 980,Samsung,SSD,6999,8
-Corsair Vengeance,Corsair,RAM,4999,67
+RTX 4060,NVIDIA,GPU,29999,8
+RTX 4070,NVIDIA,GPU,44999,5
+RTX 4080,NVIDIA,GPU,89999,2
+RTX 4090,NVIDIA,GPU,169999,1
+RX 7600,AMD,GPU,25999,7
+RX 7700 XT,AMD,GPU,44999,4
+RX 7800 XT,AMD,GPU,55999,3
+Ryzen 5 5600X,AMD,CPU,15999,12
+Ryzen 7 7700X,AMD,CPU,28999,8
+Ryzen 9 7900X,AMD,CPU,42999,4
+Ryzen 9 9950X,AMD,CPU,64999,2
+Intel i5 12400F,Intel,CPU,12999,15
+Intel i5 14600K,Intel,CPU,27999,6
+Intel i7 14700K,Intel,CPU,37999,5
+Intel i9 14900K,Intel,CPU,58999,2
+Corsair Vengeance 16GB,Corsair,RAM,4999,20
+Corsair Vengeance 32GB,Corsair,RAM,8999,12
+Kingston Fury 16GB,Kingston,RAM,4799,18
+Kingston Fury 32GB,Kingston,RAM,8799,10
+G.Skill Trident Z 32GB,G.Skill,RAM,9999,8
+Samsung 980 1TB,Samsung,SSD,6999,15
+Samsung 990 Pro 2TB,Samsung,SSD,14999,5
+WD Blue 1TB,Western Digital,SSD,6499,12
+WD Black SN850X,Western Digital,SSD,13999,4
+Crucial P3 1TB,Crucial,SSD,5999,10
+Seagate Barracuda 2TB,Seagate,HDD,5499,14
+WD Blue 2TB,Western Digital,HDD,5299,12
+Seagate IronWolf 4TB,Seagate,HDD,9999,6
+Corsair RM750e,Corsair,PSU,8499,8
+Corsair RM850x,Corsair,PSU,11999,5
+Cooler Master MWE 650,Cooler Master,PSU,5499,10
+Deepcool PM750D,Deepcool,PSU,6999,7
+NZXT H5 Flow,NZXT,Cabinet,7499,6
+Corsair 4000D,Corsair,Cabinet,7999,5
+Lian Li Lancool 216,Lian Li,Cabinet,8999,4
+Cooler Master TD500,Cooler Master,Cabinet,8499,5
+Deepcool AK400,Deepcool,Cooler,2499,15
+Noctua NH-D15,Noctua,Cooler,8999,4
+Cooler Master Hyper 212,Cooler Master,Cooler,2999,12
+NZXT Kraken 360,NZXT,Cooler,14999,3

@@ -190,20 +190,20 @@ def analytics():
 
     conn.close()
 
-    plt.figure(figsize=(10,6))
+    plt.figure(figsize=(10,8))
 
-    plt.bar(
+    plt.barh(
     df2["Brand"],
     df2["TotalStock"]
     )
 
     plt.title("Stock by Brand")
-    plt.xlabel("Brand")
-    plt.ylabel("Total Stock")
+    plt.xlabel("Total Stock")
+    plt.ylabel("Brand")
+
+    plt.grid(axis="x")
 
     plt.tight_layout()
-
-    plt.grid(axis="y")
 
     plt.savefig("static/brand_graph.png")
 
