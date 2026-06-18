@@ -104,3 +104,10 @@ body {
 .dashboard-card-4 {
     border-top: 5px solid #dc3545;
 }
+.analytics-card img{
+    transition: 0.3s;
+}
+
+.analytics-card img:hover{
+    transform: scale(1.03);
+}

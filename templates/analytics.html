@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -7,10 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+
 </head>
 
 <body>
 
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
 
         <div class="container">
@@ -48,7 +52,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/analytics">
+                        <a class="nav-link active" href="/analytics">
                             Analytics
                         </a>
                     </li>
@@ -70,36 +74,130 @@
     <div class="container mt-5">
 
         <h1 class="text-center mb-4">
-            Inventory Analytics
+            📈 Inventory Analytics
         </h1>
+
+        <div class="card shadow mb-4">
+
+            <div class="card-body text-center">
+
+                <h4>
+                    Analytics Overview
+                </h4>
+
+                <p class="text-muted">
+
+                    This analytics dashboard provides insights into
+                    product distribution, inventory value by brand,
+                    and products that require immediate restocking.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="alert alert-info text-center">
+
+            <strong>Insight:</strong>
+
+            Analytics help identify inventory distribution,
+            inventory value and low stock products.
+
+        </div>
 
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-4">
 
-                <div class="card shadow p-3">
+                <div class="card analytics-card h-100 p-3">
 
                     <h4 class="text-center">
-                        Products by Category
+                        📊 Products by Category
                     </h4>
 
                     <img src="{{ url_for('static', filename='category_graph.png') }}" class="img-fluid">
+
+                    <p class="text-muted text-center mt-3">
+
+                        Shows how products are distributed across
+                        different categories.
+
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-4">
 
-                <div class="card shadow p-3">
+                <div class="card analytics-card h-100 p-3">
 
                     <h4 class="text-center">
-                        Stock by Brand
+                        💰 Inventory Value by Brand
                     </h4>
 
                     <img src="{{ url_for('static', filename='brand_graph.png') }}" class="img-fluid">
 
+                    <p class="text-muted text-center mt-3">
+
+                        Displays total inventory value held by
+                        each brand.
+
+                    </p>
+
                 </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card analytics-card p-3">
+
+                    <h4 class="text-center">
+                        ⚠️ Low Stock Products
+                    </h4>
+
+                    <img src="{{ url_for('static', filename='low_stock_graph.png') }}" class="img-fluid">
+
+                    <p class="text-muted text-center mt-3">
+
+                        Products with stock below 5 units that
+                        may require immediate replenishment.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card shadow mt-4">
+
+            <div class="card-body">
+
+                <h5>
+                    🚀 Future Scope
+                </h5>
+
+                <ul>
+
+                    <li>Monthly inventory trend analysis</li>
+
+                    <li>Automatic stock alerts</li>
+
+                    <li>Inventory forecasting</li>
+
+                    <li>Supplier management integration</li>
+
+                    <li>Sales analytics dashboard</li>
+
+                </ul>
 
             </div>
 
@@ -114,12 +212,15 @@
         </div>
 
     </div>
-
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <footer class="text-center mt-5 mb-3 text-muted">
         Hardware Inventory Management System © 2026
     </footer>
+    
+
 </body>
 
 </html>
