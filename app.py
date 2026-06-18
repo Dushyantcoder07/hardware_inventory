@@ -1,11 +1,12 @@
-from flask import Flask, render_template,request,redirect
+from flask import Flask, render_template, request, redirect
 from database import get_connection
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def home():
-    
+
     search = request.args.get("search")
 
     conn = get_connection()
@@ -13,23 +14,19 @@ def home():
 
     if search:
         cursor.execute(
-            "SELECT * FROM Products WHERE ProductName LIKE ?",
-            ('%' + search + '%',)
+            "SELECT * FROM Products WHERE ProductName LIKE ?", ("%" + search + "%",)
         )
     else:
-        cursor.execute(
-            "SELECT * FROM Products"
-        )
+        cursor.execute("SELECT * FROM Products")
 
     products = cursor.fetchall()
 
     conn.close()
 
     return render_template(
-        "index.html",
-        products=products,
-        total_products=len(products)
+        "index.html", products=products, total_products=len(products)
     )
+
 
 @app.route("/dashboard")
 def dashboard():
@@ -55,10 +52,11 @@ def dashboard():
         "dashboard.html",
         total_products=total_products,
         total_stock=total_stock,
-        total_brands=total_brands
+        total_brands=total_brands,
     )
 
-@app.route("/add",methods=["GET","POST"])
+
+@app.route("/add", methods=["GET", "POST"])
 def add_product():
 
     if request.method == "POST":
@@ -71,26 +69,27 @@ def add_product():
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute(""" INSERT INTO Products
+        cursor.execute(
+            """ INSERT INTO Products
             (ProductName, Brand, Category, Price, Quantity)
             VALUES (?, ?, ?, ?, ?)""",
-            (product_name,brand,category,price,quantity))
-        
+            (product_name, brand, category, price, quantity),
+        )
+
         conn.commit()
         conn.close()
 
         return redirect("/")
-    
+
     return render_template("add_product.html")
 
-@app.route("/edit/<int:id>",methods=["GET","POST"])
+
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit_product(id):
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute(
-        "SELECT * FROM Products WHERE ProductID = ?",(id,)
-    )
+    cursor.execute("SELECT * FROM Products WHERE ProductID = ?", (id,))
 
     product = cursor.fetchone()
 
@@ -105,7 +104,8 @@ def edit_product(id):
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
                 UPDATE Products
                 SET ProductName=?,
                 Brand=?,
@@ -113,14 +113,9 @@ def edit_product(id):
                 Price=?,
                 Quantity=?
             WHERE ProductID=?
-        """, (
-        product_name,
-        brand,
-        category,
-        price,
-        quantity,
-        id
-    ))
+        """,
+            (product_name, brand, category, price, quantity, id),
+        )
 
         conn.commit()
         conn.close()
@@ -128,41 +123,41 @@ def edit_product(id):
         return redirect("/")
     return render_template("edit_product.html", product=product)
 
+
 @app.route("/delete/<int:id>")
 def delete_product(id):
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute(
-                  "DELETE FROM Products WHERE ProductID=?",(id,))
-    
+    cursor.execute("DELETE FROM Products WHERE ProductID=?", (id,))
+
     conn.commit()
     conn.close()
     return redirect("/")
 
+
 @app.route("/analytics")
 def analytics():
 
-    #importing pandas
-    import pandas as pd 
+    # importing pandas
+    import pandas as pd
+
     conn = get_connection()
     query = """SELECT Category,
                 COUNT(*) AS ProductCount
                 FROM Products
                 GROUP BY Category"""
-    
-    df = pd.read_sql(query,conn)
+
+    df = pd.read_sql(query, conn)
 
     conn.close()
-    
-    #importing matplot for graph
-    import matplotlib.pyplot as plt
-    plt.figure(figsize=(10,6))
 
-    plt.bar(
-    df["Category"],
-    df["ProductCount"]
-    )
+    # importing matplot for graph
+    import matplotlib.pyplot as plt
+
+    plt.figure(figsize=(10, 6))
+
+    plt.bar(df["Category"], df["ProductCount"])
 
     plt.title("Products by Category")
     plt.xlabel("Category")
@@ -176,7 +171,7 @@ def analytics():
 
     plt.close()
 
-    #GRAPH-2
+    # GRAPH-2
 
     conn = get_connection()
 
@@ -190,12 +185,9 @@ def analytics():
 
     conn.close()
 
-    plt.figure(figsize=(10,8))
+    plt.figure(figsize=(10, 8))
 
-    plt.barh(
-    df2["Brand"],
-    df2["TotalStock"]
-    )
+    plt.barh(df2["Brand"], df2["TotalStock"])
 
     plt.title("Stock by Brand")
     plt.xlabel("Total Stock")
@@ -210,27 +202,38 @@ def analytics():
     plt.close()
     return render_template("analytics.html")
 
+
 @app.route("/reports")
 def reports():
-    
-    conn= get_connection()
+
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
-    SELECT
-        p.ProductName,
-        b.BrandName,
-        c.CategoryName,
-        p.Price,
-        p.Quantity
+        SELECT
+            b.BrandName,
+            c.CategoryName,
+            COUNT(*) AS TotalProducts,
+            SUM(p.Quantity) AS TotalStock,
+            SUM(p.Price * p.Quantity) AS InventoryValue
+
         FROM Products p
-    INNER JOIN Brands b
-        ON p.Brand = b.BrandName
-    INNER JOIN Categories c
-        ON p.Category = c.CategoryName
-""")
-    
-    report_data= cursor.fetchall()
+
+        INNER JOIN Brands b
+            ON p.Brand = b.BrandName
+
+        INNER JOIN Categories c
+            ON p.Category = c.CategoryName
+
+        GROUP BY
+            b.BrandName,
+            c.CategoryName
+
+        ORDER BY
+            InventoryValue DESC
+        """)
+
+    report_data = cursor.fetchall()
 
     conn.close()
 
@@ -261,10 +264,10 @@ def import_csv():
                 FROM Products
                 WHERE ProductName = ?
                 """,
-                (product_name,)
+                (product_name,),
             )
 
-            existing_product = cursor.fetchone()   
+            existing_product = cursor.fetchone()
 
             if existing_product:
 
@@ -283,8 +286,8 @@ def import_csv():
                         row["Category"],
                         row["Price"],
                         row["Quantity"],
-                        product_name
-                    )
+                        product_name,
+                    ),
                 )
 
             else:
@@ -300,8 +303,8 @@ def import_csv():
                         row["Brand"],
                         row["Category"],
                         row["Price"],
-                        row["Quantity"]
-                    )
+                        row["Quantity"],
+                    ),
                 )
 
         conn.commit()
