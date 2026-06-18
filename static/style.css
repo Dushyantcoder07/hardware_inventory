@@ -25,6 +25,12 @@ body{
 .card{
     border: none;
     border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover{
+    transform: translateY(-5px);
 }
 
 .card:hover{
@@ -34,6 +40,7 @@ body{
 .navbar-brand{
     font-weight: bold;
     font-size: 1.3rem;
+    letter-spacing: 1px;
 }
 
 .nav-link{
@@ -64,4 +71,19 @@ body{
 
 .nav-link:hover::after{
     width: 100%;
+}
+.navbar{
+    background: linear-gradient(
+        90deg,
+        #0f172a,
+        #1e293b,
+        #334155
+    ) !important;
+}
+.btn{
+    transition: all 0.3s ease;
+}
+
+.btn:hover{
+    transform: translateY(-3px);
 }
