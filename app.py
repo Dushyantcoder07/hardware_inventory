@@ -144,68 +144,113 @@ def delete_product(id):
 @app.route("/analytics")
 def analytics():
 
-    # importing pandas
+
     import pandas as pd
-
-    conn = get_connection()
-    query = """SELECT Category,
-                COUNT(*) AS ProductCount
-                FROM Products
-                GROUP BY Category"""
-
-    df = pd.read_sql(query, conn)
-
-    conn.close()
-
-    # importing matplot for graph
     import matplotlib.pyplot as plt
 
-    plt.figure(figsize=(10, 6))
-
-    plt.bar(df["Category"], df["ProductCount"])
-
-    plt.title("Products by Category")
-    plt.xlabel("Category")
-    plt.ylabel("Number of Products")
-
-    plt.grid(axis="y")
-
-    plt.savefig("static/category_graph.png")
-
-    plt.tight_layout()
-
-    plt.close()
-
-    # GRAPH-2
+    # -------------------------
+    # Graph 1 : Products by Category
+    # -------------------------
 
     conn = get_connection()
 
-    query2 = """
-        SELECT Brand,
-        SUM(Quantity) AS TotalStock
+    query1 = """
+        SELECT
+            Category,
+            COUNT(*) AS ProductCount
         FROM Products
-        GROUP BY Brand  """
+        GROUP BY Category
+    """
+
+    df1 = pd.read_sql(query1, conn)
+
+    plt.figure(figsize=(8,5))
+
+    plt.pie(
+        df1["ProductCount"],
+        labels=df1["Category"],
+        autopct="%1.1f%%"
+    )
+
+    plt.title("Products by Category")
+    plt.tight_layout()
+    plt.savefig("static/category_graph.png")
+    
+    plt.close()
+
+# -------------------------
+# Graph 2 : Inventory Value by Brand
+# -------------------------
+
+    query2 = """
+        SELECT
+            Brand,
+            SUM(Price * Quantity) AS InventoryValue
+        FROM Products
+        GROUP BY Brand
+    """
 
     df2 = pd.read_sql(query2, conn)
 
-    conn.close()
+    plt.figure(figsize=(10,6))
 
-    plt.figure(figsize=(10, 8))
+    plt.bar(
+        df2["Brand"],
+        df2["InventoryValue"]
+    )
 
-    plt.barh(df2["Brand"], df2["TotalStock"])
+    plt.title("Inventory Value by Brand")
 
-    plt.title("Stock by Brand")
-    plt.xlabel("Total Stock")
-    plt.ylabel("Brand")
+    plt.xlabel("Brand")
 
-    plt.grid(axis="x")
+    plt.ylabel("Inventory Value (₹)")
+
+    plt.xticks(rotation=45)
+
+    plt.grid(axis="y")
 
     plt.tight_layout()
 
     plt.savefig("static/brand_graph.png")
 
     plt.close()
+
+# -------------------------
+# Graph 3 : Low Stock Products
+# -------------------------
+
+    query3 = """
+        SELECT
+            ProductName,
+            Quantity
+        FROM Products
+        WHERE Quantity < 5
+    """
+
+    df3 = pd.read_sql(query3, conn)
+
+    conn.close()
+
+    plt.figure(figsize=(10,6))
+
+    plt.barh(
+        df3["ProductName"],
+        df3["Quantity"]
+    )
+
+    plt.title("Low Stock Products")
+
+    plt.xlabel("Quantity")
+
+    plt.tight_layout()
+
+    plt.savefig("static/low_stock_graph.png")
+
+    plt.close()
+
     return render_template("analytics.html")
+
+
 
 
 @app.route("/reports")
