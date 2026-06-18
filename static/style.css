@@ -1,63 +1,64 @@
-body{
+body {
     background-color: #f4f6f9;
 }
 
-.container-box{
+.container-box {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.page-title{
+.page-title {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.table{
+.table {
     background: white;
 }
 
-.btn{
+.btn {
     margin-right: 5px;
 }
 
-.card{
+.card {
     border: none;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
-.card:hover{
+.card:hover {
     transform: translateY(-5px);
 }
 
-.card:hover{
+.card:hover {
     transform: translateY(-5px);
     transition: 0.3s;
 }
-.navbar-brand{
+
+.navbar-brand {
     font-weight: bold;
     font-size: 1.3rem;
     letter-spacing: 1px;
 }
 
-.nav-link{
+.nav-link {
     font-weight: 500;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     transform: translateY(-2px);
     transition: 0.2s;
 }
 
-.nav-link{
+.nav-link {
     position: relative;
     font-weight: 500;
 }
 
-.nav-link::after{
+.nav-link::after {
     content: '';
     position: absolute;
     left: 50%;
@@ -69,21 +70,37 @@ body{
     transform: translateX(-50%);
 }
 
-.nav-link:hover::after{
+.nav-link:hover::after {
     width: 100%;
 }
-.navbar{
-    background: linear-gradient(
-        90deg,
-        #0f172a,
-        #1e293b,
-        #334155
-    ) !important;
+
+.navbar {
+    background: linear-gradient(90deg,
+            #0f172a,
+            #1e293b,
+            #334155) !important;
 }
-.btn{
+
+.btn {
     transition: all 0.3s ease;
 }
 
-.btn:hover{
+.btn:hover {
     transform: translateY(-3px);
+}
+
+.dashboard-card-1 {
+    border-top: 5px solid #0d6efd;
+}
+
+.dashboard-card-2 {
+    border-top: 5px solid #198754;
+}
+
+.dashboard-card-3 {
+    border-top: 5px solid #ffc107;
+}
+
+.dashboard-card-4 {
+    border-top: 5px solid #dc3545;
 }

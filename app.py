@@ -46,6 +46,10 @@ def dashboard():
     cursor.execute("SELECT COUNT(*) FROM Brands")
     total_brands = cursor.fetchone()[0]
 
+    # Total Categories
+    cursor.execute("SELECT COUNT(*) FROM Categories")
+    total_categories = cursor.fetchone()[0]
+
     conn.close()
 
     return render_template(
@@ -53,6 +57,7 @@ def dashboard():
         total_products=total_products,
         total_stock=total_stock,
         total_brands=total_brands,
+        total_categories=total_categories
     )
 
 
